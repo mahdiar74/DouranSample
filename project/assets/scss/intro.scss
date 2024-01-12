@@ -1,0 +1,35 @@
+$color : pink; 
+$prop : width;
+$selector : '.demo';
+
+// interpolation
+#{$selector}{
+    background-color: $color;
+    #{$prop}: 200px;
+}
+.menu{
+    width: 100%;
+    background-color: #000;
+    display: flex;
+
+    .menu-item{
+        margin-right: 10px;
+
+        .menu-link{
+            color: $color;
+            display: inline-block;
+            padding: 10px; 
+
+            &:hover{
+                color: red;
+            }
+
+            .menu-icon{
+                background-color: #fff;
+                display: inline-block;
+                #{$prop}: 10px;
+                height: 10px;
+            }
+        }
+    }
+}

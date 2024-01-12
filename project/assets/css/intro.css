@@ -1,0 +1,27 @@
+.demo {
+  background-color: pink;
+  width: 200px;
+}
+
+.menu {
+  width: 100%;
+  background-color: #000;
+  display: flex;
+}
+.menu .menu-item {
+  margin-right: 10px;
+}
+.menu .menu-item .menu-link {
+  color: pink;
+  display: inline-block;
+  padding: 10px;
+}
+.menu .menu-item .menu-link:hover {
+  color: red;
+}
+.menu .menu-item .menu-link .menu-icon {
+  background-color: #fff;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}/*# sourceMappingURL=intro.css.map */

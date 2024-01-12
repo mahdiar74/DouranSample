@@ -1,0 +1,7 @@
+@mixin transition( $property : all , $duration : 0.4s , $delay : 0s , $timing : linear ){
+    transition: $property $duration $delay $timing ;
+}
+
+@mixin bradius( $radius : 3px ){
+    border-radius: $radius;
+}

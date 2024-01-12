@@ -1,0 +1,20 @@
+@import 'variables';
+
+.section-header{
+    position: relative;
+    background-color: $color-third;
+    a{
+        fill: $color-third; 
+        
+        span,.wave{
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translate(-50% , -90%);
+        }
+        .material-icons{
+            color: $color-white;
+            z-index: 2;
+        }
+    }
+}

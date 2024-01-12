@@ -1,0 +1,17 @@
+.section-header {
+  position: relative;
+  background-color: #981df0;
+}
+.section-header a {
+  fill: #981df0;
+}
+.section-header a span, .section-header a .wave {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -90%);
+}
+.section-header a .material-icons {
+  color: #fff;
+  z-index: 2;
+}/*# sourceMappingURL=section-header.css.map */

@@ -1,0 +1,498 @@
+@import 'mixin';
+@import 'variables';
+@import 'section-header';
+
+@font-face {
+    font-family: $font-family;
+    src: url('#{$font-uri}Oswald.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: $font-icon;
+    src: url('#{$font-uri}materialdesignicons-webfont.woff2') format('woff2');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: $font-icon2;
+    src: url('#{$font-uri}fl-bigmug-line.woff') format('woff2');
+    font-display: swap;
+}
+
+@keyframes fadeInUp {
+    0% {
+        margin-top: 40px;
+        display: none;
+        opacity: 0;
+    }
+
+    100% {
+        margin-top: 0px;
+        display: block;
+        opacity: 1;
+    }
+}
+@keyframes fadeOutDown {
+    0% {
+        margin-top: 0px;
+        display: block;
+        opacity: 1;
+    }
+
+    100% {
+        margin-top: 40px;
+        display: none;
+        opacity: 0;
+    }
+}
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+@keyframes fadeOut{
+    from{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    to{
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+}
+body {
+    font-family: $font-family;
+}
+
+%color-white {
+    color: $color-white;
+}
+
+.btn{
+    @include bradius(30px);
+    @include transition;
+
+    animation: fadeIn 2s .5s both;
+    color: $color-white;
+    padding: 12px 24px;
+    font-size: $font-size;
+    position: relative;
+    overflow: hidden;
+
+    b{
+        @include transition($delay: .4s);
+        font-variation-settings: 'wght' 100;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    @for $iterator from 1 through 20{
+        i:nth-child(#{$iterator}){
+            animation: fadeOut 0.2s ($iterator * 0.02s) both;
+        }
+    }
+    i{
+        display: inline-block;
+        font-variation-settings: 'wght' 100;
+        font-style: normal;
+        opacity: 0;
+    }
+
+    @media only screen and (max-width: 400.98px){
+        margin-bottom: 15px;
+    }
+    &:hover{
+        background-color: $color-third;
+        @for $iterator from 1 through 20{
+            i:nth-child(#{$iterator}){
+                animation: fadeIn 0.2s ($iterator * 0.02s + 0.4) both;
+            }
+        }
+        i{
+            opacity: 0;
+        }
+        b{
+            @include transition($duration : 0s);
+            top: 130%;
+        }
+    }
+
+    &.btn-second{
+        color: black;
+        border: solid 1px $color-gray;
+
+        b, i{
+            font-variation-settings: 'wght' 400;
+        }
+    }
+}
+.main-slider-wrapper .btn.btn-second{
+    color: white;
+    b, i{
+        font-variation-settings: 'wght' 100;
+    }
+}
+.btn-main{
+    background-color: $color-main;
+}
+.main-title{
+    color: $color-main;
+    font-size: $font-size * 1.5;
+    font-variation-settings: 'wght' 400;
+}
+
+.second-title{
+    color: $color-gray;
+    font-size: $font-size * 1.2;
+    font-variation-settings: 'wght' 300;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2000;
+    backdrop-filter: blur( 14px );
+    @include transition;
+
+    .dropdown {
+
+        &:hover,
+        & .dropdown-toggle.show {
+            color: $color-second;
+                @media only screen and (max-width: 991.98px){
+                    color: darken($color-second , 30%);            
+                }
+
+            &::before {
+                @media only screen and (min-width: 992px){
+                    width: 100%; 
+                }
+            }
+        }
+
+        .dropdown-menu {
+            padding: 0;
+            overflow: hidden;
+            animation: fadeOutDown 1s both;
+            
+            @media only screen and (min-width: 992px){
+                width: 300%;
+            }
+
+
+            &.show {
+                animation: fadeInUp 1s both;
+            }
+
+            li:last-child .dropdown-item {
+                border: none;
+            }
+
+            .dropdown-item {
+                @include transition($duration: 0.2s);
+
+                padding: 1rem 0;
+                font-variation-settings: 'wght' 100;
+                border-bottom: solid 1px lighten($color-gray , 40%);
+
+                &:active {
+                    background-color: transparent;
+                    color: $color-main;
+                }
+
+                &:hover {
+                    padding-left: 7px;
+                    color: $color-main;
+
+                    &::before {
+                        opacity: 1;
+                        margin-left: 0;
+                    }
+                }
+
+                &::before {
+                    @include transition($duration: 0.2s);
+
+                    margin-left: -7px;
+                    opacity: 0;
+                    color: $color-main;
+                    font-family: 'material icons';
+                    content: '\e5c8';
+                    transform: translateY(1px);
+                    display: inline-block;
+                }
+            }
+        }
+    }  
+
+    .nav-item>.dropdown-menu{
+        @media screen and (max-width: 991.98px) {
+                    // submenus
+            background: transparent;
+            border: 0;
+            padding-left: 20px;
+
+            .dropdown-item{
+                font-variation-settings: 'wght' 400
+            }
+        }
+    }
+
+    .nav-link {
+        @include transition;
+        @extend %color-white;
+
+        position: relative;
+        font-variation-settings: 'wght' 400;
+        font-size: $font-size * 1.2;
+
+
+        &:hover {
+            color: $color-second;
+
+            &::before {
+                @media only screen and (min-width: 992px){
+                    width: 100%;
+                }
+            }
+        }
+
+        &::before {
+            @include transition;
+
+            content: '';
+            width: 0;
+            height: 3px;
+            background-color: $color-second;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    .navbar-toggler{
+        filter: invert(1);
+        border: none;
+        transform: translateY(-4px);
+        margin-right: 5px;
+    }
+    .search-part{
+        @media only screen and (max-width: 992px){
+            flex-direction: row;
+            gap : .5rem;
+        }
+    }
+    .menu-wrapper {
+        background: rgba(255,255,255,.7);
+        padding: 20px;
+        height: 100vh !important;
+        overflow: auto;
+
+        .nav-link{
+            @media only screen and (max-width: 991.98px){
+                color: darken($color-third , 40%);
+                //color: change-color( $color-third , $darken: 20%)
+            }
+        }
+        .show{
+            .nav-link{
+
+            }
+        }
+    }
+    
+}
+
+main {
+    .main-slider-wrapper {
+        @extend %color-white;
+
+        position: relative;
+        margin-bottom: 50px;
+        padding-top: 190px;
+        padding-bottom: 150px;
+        background: linear-gradient(135deg, #6d0eb1 59%, #080ab4 100%);
+
+        span {
+            @include transition($timing: ease-out, $duration: 0.8s);
+
+            transform: scale(0.8) translateY(-50px);
+            opacity: 0;
+            font-size: $font-size * 2;
+            font-variation-settings: 'wght' 100;
+
+            &:first-child{
+                transform: scale(0.8) translateY(50px);
+            }
+        }
+
+        .active{
+            span, h1{
+                transform: scale(1);
+                opacity: 1;
+
+            }
+        }
+        span{
+            @media (max-width: 575.98px) {
+                font-size: 30px;
+            }
+            @media (max-width: 400.98px) {
+                font-size: 20px;
+            }
+        }
+        h1 {
+            @include transition($timing: ease-out, $duration: 0.8s);
+
+            font-size: $font-size * 7;
+            font-variation-settings: 'wght' 400;
+            width: fit-content;
+            position: relative;
+            margin: auto;
+            padding: 0 7rem;
+            transform: scale(0.8);
+            opacity: 0;
+
+            @media (max-width: 575.98px) {
+                padding: 0 2rem;
+                font-size: 40px;
+            }
+            @media (max-width: 400.98px) {
+                font-size: 30px;
+                padding: 0 1rem;
+                width: max-content;
+            }
+
+            &::before,
+            &::after {
+                @include bradius;
+
+                content: '';
+                background-color: $color-white;
+                width: 15px;
+                height: 15px;
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%) rotate(45deg);
+                
+                @media (max-width: 400.98px) {
+                    left: -20px;
+                }
+            }
+
+            &::after {
+                left: unset;
+                right: 0;
+                @media (max-width: 400.98px) {
+                    right: -20px;
+                    left: unset;
+                }
+            }
+             
+        }
+
+        .carousel-indicators {
+            bottom: -20%;
+
+            [data-bs-target] {
+                @include bradius(50%);
+
+                width: 15px;
+                height: 15px;
+                background-color: $color-second-dark;
+
+                &.active{
+                    opacity: 1;
+                }
+            }
+        }
+
+        .wave-svg {
+            position: relative;
+            bottom: -.3px;
+
+            @media only screen and (max-width: 767px){
+                height: 15px !important;
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 5px;
+                background-color: $color-white;
+                bottom: 0;
+            }
+        }
+    }
+    .our-story{
+
+        .our-story-caption{
+            .nav-item{
+                font-size: $font-size * 1.5;
+
+                .line{
+                    @include transition;
+
+                    width: 0%;
+                    height: 1px;
+                    bottom: -1px;
+                    left: 0;
+                }
+                
+                .active + .line{
+                    width: 100%;
+                    background-color: $color-third;
+                }
+                
+            }
+            .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus{
+                border: none;
+            }
+            .nav-tabs .nav-link.active{
+                background-color: transparent;
+                border: none;
+            }
+            .nav-link{
+                @include transition;
+                border: none !important;
+                color: lighten($color-black , 20%);
+                
+                &.active{
+                    color: $color-third;
+                    
+                }
+            }
+            .tab-pane{
+                img{
+                    width: 100%;
+                }
+                p{
+                    color: $color-gray;
+                    font-variation-settings: 'wght' 300;
+                    color: darken( $color-gray , 30% );
+                    line-height: 1.7;
+                }
+                blockquote{
+                    color: darken( $color-gray , 30% );
+                    font-style: italic;
+                }
+            }
+        }
+    }
+    .what-we-do-wrapper{
+
+
+    }
+}
